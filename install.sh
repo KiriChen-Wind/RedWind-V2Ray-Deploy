@@ -1,6 +1,6 @@
 #!/bin/bash
 
-author=RedWind-Team
+author=233boy
 # github=https://github.com/233boy/v2ray
 
 # bash fonts colors
@@ -289,8 +289,9 @@ pass_args() {
 exit_and_del_tmpdir() {
     rm -rf $tmpdir
     [[ ! $1 ]] && {
-        msg err "抱歉..."
+        msg err "哦豁.."
         msg err "安装过程出现错误..."
+        echo -e "反馈问题) https://github.com/${is_sh_repo}/issues"
         echo
         exit 1
     }
@@ -311,7 +312,7 @@ main() {
     # show welcome msg
     clear
     echo
-    echo "........... RedWind V2Ray 一键部署脚本 .........."
+    echo "........... $is_core_name script by $author .........."
     echo
 
     # start installing...
@@ -333,7 +334,7 @@ main() {
 
     timedatectl set-ntp true &>/dev/null
     [[ $? != 0 ]] && {
-        msg warn "${yellow}\e[4m需要注意：无法设置自动同步时间, 可能会影响使用 VMess 协议.${none}"
+        msg warn "${yellow}\e[4m提醒!!! 无法设置自动同步时间, 可能会影响使用 VMess 协议.${none}"
     }
 
     # install dependent pkg
@@ -429,15 +430,6 @@ main() {
     load core.sh
     # create a tcp config
     add tcp
-    
-    # create a socks config with RedWind credentials
-    msg ok "生成 Socks 配置文件..."
-    get_port
-    is_socks_port=$tmp_port
-    is_socks_user="RedWind"
-    is_socks_pass="RedWind${is_socks_port}"
-    add socks $is_socks_port $is_socks_user $is_socks_pass
-    
     # remove tmp dir and exit.
     exit_and_del_tmpdir ok
 }
